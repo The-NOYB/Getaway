@@ -9,7 +9,7 @@ class Gui():
     def menu(self, key_input) -> dict:
 
         # displaying the title
-        gameName = self.font.render( "Dhoom", True, (0,0,0) )
+        gameName = self.font.render( "Getaway", True, (0,0,0) )
         centered_pos = [ (self.screen_dimensions[x] - gameName.get_size()[x])//2 for x in range(2) ]
         self.screen.blit(gameName, centered_pos)
 

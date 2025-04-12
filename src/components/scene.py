@@ -1,7 +1,9 @@
 import pygame as pg
 from .gui import Gui
+from .map import Map
 from .entities.player import Player
 from .entities.enemies import Enemies
+from .entities.renderer import Renderer
 
 class Scene():
 
@@ -19,19 +21,24 @@ class Scene():
 
         if isinstance(data, dict):
             self.state = data["state"]
-            self.player = Player( data["playerName"] )
+            self.mapObj = Map()
+            self.player = Player( data["playerName"], 400, 300 )
+            self.renderer = Renderer( self.player, self.mapObj.grid )
 
-    def game(self, key_input) -> None:
-        pass
+    def game(self, key_input, mouse_input) -> None:
+        print(mouse_input)
+        self.player.update( key_input, mouse_input)
+        self.renderer.draw( self.screen )
+        self.player.draw( self.screen )
         
     def pause(self, key_input) -> None:
         self.state = self.gui.pause( key_input )
 
-    def selector(self, key_input) -> None:
+    def selector(self, key_input, mouse_input) -> None:
 
         if self.state == "menu":
             self.menu( key_input )
         elif self.state == "game":
-            self.game( key_input )
+            self.game( key_input, mouse_input)
         elif self.state == "pause":
             self.pause( key_input )
