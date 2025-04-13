@@ -4,9 +4,9 @@ from .ray import Ray
 from .player import Player
 
 class Renderer():
-    def __init__( self, player, mapGrid ):
+    def __init__( self, player, mapObj ):
         self.player = player
-        self.mapGrid = mapGrid
+        self.mapObj = mapObj
         self.rays = []
 
     def castAll( self ):
@@ -14,7 +14,7 @@ class Renderer():
         start_angle = ( self.player.angle - FOV/2 )
 
         for i in range( NUM_RAYS ):
-            ray = Ray( start_angle, self.player, self.mapGrid )
+            ray = Ray( start_angle, self.player, self.mapObj )
             ray.cast()
             self.rays.append( ray )
 

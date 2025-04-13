@@ -9,10 +9,10 @@ def normalize_angle( angle ):
     return angle
 
 class Ray():
-    def __init__(self, angle, player, mapGrid) -> None:
+    def __init__(self, angle, player, mapObj) -> None:
         self.angle = normalize_angle(angle)
         self.player = player
-        self.mapGrid = mapGrid
+        self.mapObj = mapObj
 
         self.isdown = self.angle > 0 and self.angle < math.pi
         self.isup = not self.isdown
@@ -59,7 +59,7 @@ class Ray():
 
         while (next_intersection_x <= WIDTH and next_intersection_x >= 0 and next_intersection_y <= HEIGHT and next_intersection_y >= 0):
 
-            if self.mapGrid[ int(next_intersection_y // TILESIZE) ][ int(next_intersection_x // TILESIZE) ]:
+            if self.mapObj.is_wall( next_intersection_x, next_intersection_y ):
                 found_horizontal_wall = True
                 horizontal_hit_x = next_intersection_x
                 horizontal_hit_y = next_intersection_y
@@ -102,7 +102,7 @@ class Ray():
 
         while (next_intersection_x <= WIDTH and next_intersection_x >= 0 and next_intersection_y <= HEIGHT and next_intersection_y >= 0):
 
-            if self.mapGrid[ int(next_intersection_y // TILESIZE) ][ int(next_intersection_x // TILESIZE) ]:
+            if self.mapObj.is_wall( next_intersection_x, next_intersection_y ):
                 found_vertical_wall = True
                 vertical_hit_x = next_intersection_x
                 vertical_hit_y = next_intersection_y

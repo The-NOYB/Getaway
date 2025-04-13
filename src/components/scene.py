@@ -22,11 +22,10 @@ class Scene():
         if isinstance(data, dict):
             self.state = data["state"]
             self.mapObj = Map()
-            self.player = Player( data["playerName"], 400, 300 )
-            self.renderer = Renderer( self.player, self.mapObj.grid )
+            self.player = Player( data["playerName"], 400, 300 , self.mapObj )
+            self.renderer = Renderer( self.player, self.mapObj)
 
     def game(self, key_input, mouse_input) -> None:
-        print(mouse_input)
         self.player.update( key_input, mouse_input)
         self.renderer.draw( self.screen )
         self.player.draw( self.screen )
