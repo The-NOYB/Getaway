@@ -19,10 +19,11 @@ class Renderer():
         self.textures = []
         for texture in listdir( path):
             path_to_texture = str(join(path, texture))
-            self.textures.append( pg.image.load(path_to_texture).convert() )
+            self.textures.append( pg.transform.scale(pg.image.load(path_to_texture), (256,256)).convert() )
 
     def castAll( self ):
         self.rays = []
+        self.texture_data = []
         start_angle = ( self.player.angle - FOV/2 )
 
         for i in range( NUM_RAYS ):
@@ -48,13 +49,14 @@ class Renderer():
     """
 
     def calc_texture(self):
+        self.objects_to_render = []
         for ray, values in enumerate(self.texture_data):
             distance, line_height, texture, offset = values
 
             # handling the case where we get right into the wall
             if line_height < HEIGHT:
                 # texture is the value of which wall texture to blit and self.textures will have all the available textures
-                wall_column = self.textures[3].subsurface( offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE )
+                wall_column = self.textures[texture].subsurface( offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE )
                 # scaling the column of the wall
                 wall_column = pg.transform.scale( wall_column, (SCALE, line_height) )
                 wall_pos = ( ray * SCALE, HALF_HEIGHT - line_height //2 )
@@ -73,6 +75,7 @@ class Renderer():
         for distance, image, pos in self.objects_to_render:
                 screen.blit(image, pos)
 
+        # this was the code for drawing rects as walls
 #        counter = 0
 #        for ray in self.rays:
 #            # do not touch the code below this ihdk how it works
