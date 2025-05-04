@@ -8,17 +8,17 @@ from .entities.renderer import Renderer
 
 class Scene():
 
-    def __init__(self, screen, screen_dimensions, font) -> None:
+    def __init__(self, screen, screen_dimensions, fonts) -> None:
         self.state = "menu"
         self.screen = screen
         self.screen_dimensions = screen_dimensions
-        self.font = font
+        self.title_font, self.font = fonts
 
-        self._map = None
-        self.gui = Gui( self.screen, self.screen_dimensions, self.font )
+        self.mapObj = None
+        self.gui = Gui( self.screen, self.screen_dimensions, fonts)
 
     def menu(self, key_input, mouse_input, runtime) -> None:
-        data = self.gui.menu( key_input )
+        data = self.gui.menu( key_input, runtime)
 
         if isinstance(data, dict):
             self.state = data["state"]
@@ -28,11 +28,13 @@ class Scene():
 
     def game(self, key_input, mouse_input, runtime) -> None:
         pg.draw.rect( self.screen, (100,100,100), (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT) )
+        if key_input[pg.K_ESCAPE]:
+            self.state = "pause"
 
         self.player.update( key_input, mouse_input, runtime )
         self.renderer.draw( self.screen )
         self.player.draw( self.screen )
-        self.gui.game( self.screen )
+        self.gui.game_ui( self.screen, self.player )
         
     def pause(self, key_input, mouse_input, runtime) -> None:
         self.state = self.gui.pause( key_input )

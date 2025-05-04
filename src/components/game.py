@@ -15,10 +15,10 @@ class Game():
         self.WIDTH, self.HEIGHT = WIDTH, HEIGHT
         self.DIMENSIONS = ( self.WIDTH, self.HEIGHT )
         self.window = pg.display.set_mode( self.DIMENSIONS )
-        self.font = pg.font.Font(None, 48)
+        self.fonts = pg.font.Font(None, 102), pg.font.Font(None, 48)
 
         # setting up the scene selector
-        self.scene = Scene( self.window, self.DIMENSIONS, self.font )
+        self.scene = Scene( self.window, self.DIMENSIONS, self.fonts )
         self.runtime = 0
 
     def run(self) -> None:
@@ -36,13 +36,16 @@ class Game():
             mouse_input = pg.mouse.get_rel() + pg.mouse.get_pressed()
 
             key_input = pg.key.get_pressed()
-            self.scene.selector( key_input, mouse_input, self.runtime)
+            self.scene.selector( key_input, mouse_input, self.runtime )
 
-            # getting the fps and blit-ing it one the screen
-            fps = "%.2f" % self.clock.get_fps()
-            self.window.blit( self.font.render( fps, True, (0,0,0) ), (0, 0) )
+            self.show_fps()
             pg.display.update()
  
+    def show_fps(self) -> None:
+        # getting the fps and blit-ing it one the screen
+        fps = "%.2f" % ( 1 / ( time.time() - self.runtime ) )
+        self.window.blit( self.fonts[1].render( fps, True, (0,0,0) ), (0, 0) )
+
     def events(self) -> None:
         for event in pg.event.get():
             if event.type == pg.QUIT:
