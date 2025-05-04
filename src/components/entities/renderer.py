@@ -72,7 +72,8 @@ class Renderer():
         self.castAll()
         self.calc_texture()
 
-        for distance, image, pos in self.objects_to_render:
+        sorted_list = sorted(self.objects_to_render, key=lambda t:t[0], reverse=True)
+        for distance, image, pos in sorted_list:
                 screen.blit(image, pos)
 
         # this was the code for drawing rects as walls

@@ -23,6 +23,8 @@ class Gui():
     def player_creation(self, key_input):# -> dict?:
         pass
 
+    def ui(self, key_input):
+
     def pause(self, key_input) -> str:
 
         # display all the pause options

@@ -19,22 +19,24 @@ class Game():
 
         # setting up the scene selector
         self.scene = Scene( self.window, self.DIMENSIONS, self.font )
+        self.runtime = 0
 
     def run(self) -> None:
         # main loop for the App
         while self.running:
             self.clock.tick( 120 )
+            self.runtime = time.time()
             self.window.fill( (103,23,104) )
             
             self.events() 
 
             mouse_pos_x = pg.mouse.get_pos()[0]
-            if  mouse_pos_x <= 10 or mouse_pos_x >= WIDTH-10: # setting the mouse_pos_x to center of screen if it is near edge
+            if  mouse_pos_x < 50 or mouse_pos_x > WIDTH-50: # setting the mouse_pos_x to center of screen if it is near edge
                 pg.mouse.set_pos( (HALF_WIDTH, HALF_HEIGHT) )
             mouse_input = pg.mouse.get_rel() + pg.mouse.get_pressed()
 
             key_input = pg.key.get_pressed()
-            self.scene.selector( key_input, mouse_input )
+            self.scene.selector( key_input, mouse_input, self.runtime)
 
             # getting the fps and blit-ing it one the screen
             fps = "%.2f" % self.clock.get_fps()

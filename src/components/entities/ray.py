@@ -112,14 +112,15 @@ class Ray():
                 next_intersection_x += xa
                 next_intersection_y += ya
 
-        horizontal_distance = math.sqrt( (self.player.x - horizontal_hit_x)**2 + (self.player.y - horizontal_hit_y)**2 )
-        vertical_distance = math.sqrt( (self.player.x - vertical_hit_x)**2 + (self.player.y - vertical_hit_y)**2 )
+        horizontal_distance = math.hypot( (self.player.x - horizontal_hit_x), (self.player.y - horizontal_hit_y) )
+        vertical_distance = math.hypot( (self.player.x - vertical_hit_x), (self.player.y - vertical_hit_y) )
 
         # just storing angles for future computation
         sin_ang = math.sin(self.angle)
         cos_ang = math.cos(self.angle)
 
-        if horizontal_distance <= vertical_distance:
+        # this abomination of an if statement is due to the fact that while loops are messing up and giving 0, 0 as 
+        if (horizontal_distance <= vertical_distance and horizontal_hit_x !=0 ) or (horizontal_distance > vertical_distance and vertical_hit_x == 0):
             self.wall_hit_x, self.wall_hit_y = horizontal_hit_x, horizontal_hit_y 
             self.distance = horizontal_distance
             # for texturing
