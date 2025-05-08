@@ -14,18 +14,17 @@ class Player():
         self.moving = True
         self.mapObj = mapObj
         self.turnDir = 0
-        self.rotationSpeed = 2 * ( math.pi / 180 )
+        self.rotationSpeed = 2.1 * ( math.pi / 180 )
         self.speed = 2
         self.hitwall = False
 
         # length != distance continues the dash
-        self.dash_length = 210
+        self.dash_length = 225
         self.dash_distance = 0
-        self.dash_speed = 6
+        self.dash_speed = 9
         self.has_dashed = False
         self.dash_at = 0
-        self.dash_end = 0
-        self.dash_cooldown = 3 # 5 seconds
+        self.dash_cooldown = 4 # 4 seconds
         self.dash_dir = ""
 
     def draw(self, screen) -> None:
@@ -108,28 +107,40 @@ class Player():
         if _x < (WIDTH - 1.1 * TILESIZE) and _y < (HEIGHT - 1.1 * TILESIZE) and _x > TILESIZE * 1.1  and _y > TILESIZE * 1.1:
             if self.has_dashed:
                 if not self.mapObj.is_wall(self.x, _y) :
-                    self.x, self.y = _x, _y
-                elif not self.mapObj.is_wall(_x, self.y) :
-                    self.x, self.y = _x, _y
+                    self.y = _y
                 else:
-                    reduce_dash( _x, _y )
+                    self.reduce_dash( "y", _y )
+                    self.dash_distance = self.dash_length
+
+                if not self.mapObj.is_wall(_x, self.y) :
+                    self.x = _x
+                else:
+                    self.reduce_dash( "x", _x )
+                    self.dash_distance = self.dash_length
 
             if not self.mapObj.is_wall(self.x, _y) :
-                self.x, self.y = _x, _y
-            elif not self.mapObj.is_wall(_x, self.y) :
-                self.x, self.y = _x, _y
+                self.y = _y
+            if not self.mapObj.is_wall(_x, self.y) :
+                self.x = _x
 
         self.angle += self.turnDir * self.rotationSpeed
 
-    def reduce_dash(self, _x, _y):
-        while  (True):
-            print("huh")
-            _x -= 1
-            _y -= 1
-            if not self.mapObj.is_wall(self.x, _y) :
-                self.x, self.y = _x, _y
-                break
-            elif not self.mapObj.is_wall(_x, self.y) :
-                self.x, self.y = _x, _y
-                break
+    def reduce_dash(self, comp, val):
+        if comp == "y" and self.y - val > 0:
+            constant = 1.1
+        elif comp == "y" and self.y - val < 0:
+            constant = -1.1
+        elif comp == "x" and self.x - val > 0:
+            constant = 1.1
+        elif comp == "x" and self.x - val < 0:
+            constant = -1.1
 
+        while  (True):
+            val += constant
+
+            if comp == "y" and not self.mapObj.is_wall(self.x, val):
+                self.y = val
+                break
+            elif comp == "x" and not self.mapObj.is_wall(val, self.y):
+                self.x = val
+                break

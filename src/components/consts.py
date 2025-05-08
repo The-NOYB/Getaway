@@ -12,7 +12,7 @@ HALF_HEIGHT = 300
 ROWS = 20
 COLS = 15
 
-FOV = 90 * (math.pi/180)
+FOV = 60 * (math.pi/180)
 RES = 4
 NUM_RAYS = WIDTH // RES
 HALF_NUM_RAYS = NUM_RAYS // 2

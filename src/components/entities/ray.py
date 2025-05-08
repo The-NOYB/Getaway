@@ -22,6 +22,7 @@ class Ray():
 
         self.wall_hit_x = 0
         self.wall_hit_y = 0
+        self.wall = 0
 
         self.color = (50, 50, 50)
 
@@ -144,7 +145,7 @@ class Ray():
         self.offset = offset
         # this will fix the fish eye effect
         self.distance *= math.cos( self.player.angle - self.angle )
-
+        self.wall = self.mapObj.is_wall(self.wall_hit_x, self.wall_hit_y)
 
     def render(self, screen):
         pygame.draw.line( screen, (255, 0, 0),(self.player.x, self.player.y),(self.wall_hit_x, self.wall_hit_y) )

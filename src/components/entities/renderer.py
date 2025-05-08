@@ -34,7 +34,7 @@ class Renderer():
 
             start_angle += FOV/NUM_RAYS
             # getting data for calculation of textures
-            self.texture_data.append( (ray.distance, line_height, 1, ray.offset) )
+            self.texture_data.append( (ray.distance, line_height, ray.wall, ray.offset) )
 
     """
     The drawing of texture requires some basic data such as distance from
@@ -56,13 +56,13 @@ class Renderer():
             # handling the case where we get right into the wall
             if line_height < HEIGHT:
                 # texture is the value of which wall texture to blit and self.textures will have all the available textures
-                wall_column = self.textures[texture].subsurface( offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE )
+                wall_column = self.textures[texture-1].subsurface( offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE )
                 # scaling the column of the wall
                 wall_column = pg.transform.scale( wall_column, (SCALE, line_height) )
                 wall_pos = ( ray * SCALE, HALF_HEIGHT - line_height //2 )
             else:
                 texture_height = TEXTURE_SIZE * HEIGHT / line_height
-                wall_column = self.textures[texture].subsurface( offset * (TEXTURE_SIZE - SCALE), HALF_TEXTURE_SIZE - texture_height // 2, SCALE, texture_height )
+                wall_column = self.textures[texture-1].subsurface( offset * (TEXTURE_SIZE - SCALE), HALF_TEXTURE_SIZE - texture_height // 2, SCALE, texture_height )
                 wall_column = pg.transform.scale( wall_column, (SCALE, HEIGHT) )
                 wall_pos = ( ray * SCALE, 0 )
     

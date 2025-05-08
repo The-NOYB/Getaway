@@ -16,6 +16,7 @@ class Scene():
 
         self.mapObj = None
         self.gui = Gui( self.screen, self.screen_dimensions, fonts)
+        self.cached_screen = None
 
     def menu(self, key_input, mouse_input, runtime) -> None:
         data = self.gui.menu( key_input, runtime)
@@ -28,16 +29,18 @@ class Scene():
 
     def game(self, key_input, mouse_input, runtime) -> None:
         pg.draw.rect( self.screen, (100,100,100), (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT) )
-        if key_input[pg.K_ESCAPE]:
-            self.state = "pause"
 
         self.player.update( key_input, mouse_input, runtime )
         self.renderer.draw( self.screen )
         self.player.draw( self.screen )
-        self.gui.game_ui( self.screen, self.player )
+
+        # below cuz i want the cached_screen to have all the stuff on window
+        if key_input[pg.K_ESCAPE]:
+            self.cached_screen = pg.transform.box_blur( self.screen.copy(), 10 )
+            self.state = "pause"
         
-    def pause(self, key_input, mouse_input, runtime) -> None:
-        self.state = self.gui.pause( key_input )
+    def pause(self, key_input, mouse_input, runtime, previous_screen) -> None:
+        self.state = self.gui.pause( key_input, mouse_input, runtime, previous_screen )
 
     def selector(self, key_input, mouse_input, runtime ) -> None:
 
@@ -45,5 +48,6 @@ class Scene():
             self.menu( key_input, mouse_input, runtime )
         elif self.state == "game":
             self.game( key_input, mouse_input, runtime )
+            self.gui.game_ui( self.screen, self.player, runtime )
         elif self.state == "pause":
-            self.pause( key_input, mouse_input, runtime )
+            self.pause( key_input, mouse_input, runtime, self.cached_screen )
