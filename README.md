@@ -46,12 +46,3 @@
 
 - **Python 3.\*** – General-purpose programming language
 - **[pygame-ce](https://github.com/pygame-community/pygame-ce)** – Community Edition of pygame, used for rendering, input handling, and game loop
-
-### Run Instructions
-
-```bash
-git clone https://github.com/yourusername/getaway.git
-cd src
-python3 main.py
-```
-
