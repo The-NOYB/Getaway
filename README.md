@@ -40,9 +40,7 @@
 | Dash          | `Space`    |
 <!-- | Restart Level | `R`        | -->
 
-## 🚀 How to Run
-
-### Prerequisites
+## Prerequisites
 
 - **Python 3.\*** – General-purpose programming language
 - **[pygame-ce](https://github.com/pygame-community/pygame-ce)** – Community Edition of pygame, used for rendering, input handling, and game loop
