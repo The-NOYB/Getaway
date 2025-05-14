@@ -1,3 +1,14 @@
+import pygame as pg
+import math, time
+from ..consts import *
+
+"""
+So far the only thing I could think of is traps
+- Red wall, passing through it will kill the player, probably will just activate and de-activate
+- Ray gun, will shoot a (slow) projectile at the player if they collide player dies.
+- Time Bombs, nothing if activated player will have to do before he runs out of time, needs a gui
+"""
+
 #class Enemies():
 #    def __init__(self, x, y, player, path) -> None:
 #        self.x, self.y = x, y 

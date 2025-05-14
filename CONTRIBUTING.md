@@ -1,14 +1,17 @@
-# 🚀 Contributing to CrossMind
+# 🚀 Contributing to Getaway
 
-Thank you for considering contributing to **CrossMind**! We're excited to have you join our creative learning journey where an AI will eventually create personalized courses based on user choices. In this early phase, we're focusing on building the foundational pages and functionalities using pre-made courses.
+Thank you for considering contributing to **Getaway**! a raycasted 3D action-dash game made with Python and pygame-ce! Your input helps make the game more fun, polished, and exciting. We're excited to have you join our creative learning journey
+
+Whether you're fixing bugs, suggesting ideas, creating levels, adding Art/SFX or improving documentation — you're welcome here.
 
 ---
 
 ## ✅ Getting Started
+
 1. **Fork** this repository.
 2. **Clone** your forked repository:
    ```bash
-   git clone https://github.com/your-username/crossmind.git
+   git clone https://github.com/The-NOYB/Getaway.git
    ```
 3. **Create a new branch** for your contribution:
    ```bash
@@ -18,6 +21,7 @@ Thank you for considering contributing to **CrossMind**! We're excited to have y
 ---
 
 ## 🎯 How to Contribute
+
 - **Fix Bugs:** Check the "Issues" section for open bugs.
 - **Improve Code:** Enhance the codebase with optimizations and best practices.
 - **Add Features:** Suggest and implement new features.
@@ -26,6 +30,7 @@ Thank you for considering contributing to **CrossMind**! We're excited to have y
 ---
 
 ## 🏆 Contribution Guidelines
+
 - Follow the existing code style and structure.
 - Keep pull requests focused and straightforward.
 - Reference the related issue in your pull request.
@@ -33,13 +38,23 @@ Thank you for considering contributing to **CrossMind**! We're excited to have y
 ---
 
 ## 🛠️ Code Style
+
 - Use meaningful variable and function names.
 - Keep functions small and focused.
 - Write clean, readable, and well-commented code.
 
 ---
 
+## 🧪 Testing Your Changes
+
+Please test all changes before submitting! Make sure:
+
+- The game runs without crashing
+- New features don’t break existing ones
+
+___
 ## 🤝 Submitting a Pull Request
+
 1. **Add Changes** – Stage your changes:
    ```bash
    git add .
@@ -56,34 +71,15 @@ Thank you for considering contributing to **CrossMind**! We're excited to have y
 
 ---
 
-## 🌟 Current Contributions (Phase 1)
-For this phase, our goal is to establish the core experience of CrossMind using pre-made courses and filtering options instead of the full AI-driven course creation. Here’s what we need:
+## 🙋 Need Help?
 
-- **Homepage & Courses Page Implementation:**  
-  - Create a responsive homepage that introduces CrossMind.  
-  - Build a dedicated page to display a list of pre-made courses with details (course title, description, domains covered, etc.).
+If you get stuck or have questions, feel free to:
 
-- **Course Filtering Options:**  
-  - Develop UI elements (e.g., dropdown menus, checkboxes) that allow users to filter courses by domain (such as Chemistry, Communications, History, Biology, etc.).
-
-- **Domain Pool Setup:**  
-  - Create a data structure (e.g., JSON file) that holds the list of available domains and associated metadata.  
-  - Integrate this domain pool with the filtering functionality.
-
-- **Static Course Data:**  
-  - Populate the courses page with sample courses that showcase different domain combinations.  
-  - Ensure each course includes details to illustrate how multiple domains are merged (e.g., Chemistry + Communications, History + Biology).
-
-- **Documentation & Guidelines Update:**  
-  - Update the README and this CONTRIBUTING guide with the current project scope, explaining that Phase 1 is focused on pre-made courses and filtering rather than AI-driven generation.
-
-
----
-
-## 💬 Join the Discussion
-Need help or have questions? Join our **[Discord](https://discord.gg/your-discord-link)** for real-time collaboration and support.
+- Open a GitHub Issue
+- Start a discussion in the repo
+- Reach out to the maintainer: [mehul.noyb@gmail.com]
 
 ---
 
 ## ⭐ Thank You for Contributing!
-We truly appreciate every contribution that makes CrossMind better!
+We truly appreciate every contribution that makes Getaway better (and complete)!

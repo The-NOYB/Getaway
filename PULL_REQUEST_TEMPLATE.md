@@ -8,6 +8,8 @@ Fixes # (issue)
 ## Type of Change
 - [ ] Bug fix
 - [ ] New feature
+- [ ] New Level
+- [ ] New Art/SFX
 - [ ] Documentation update
 - [ ] Other
 
