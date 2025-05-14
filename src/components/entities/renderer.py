@@ -3,6 +3,7 @@ from os import listdir, getcwd
 from os.path import join
 from ..consts import *
 from .ray import Ray
+from .sprites import SpriteObject
 from .player import Player
 
 class Renderer():
@@ -12,6 +13,8 @@ class Renderer():
         self.rays = []
         self.texture_data = []
         self.objects_to_render = []
+        self.sprites_to_render = (SpriteObject(self.player), )
+        self.sprite= SpriteObject(self.player)
 
         # might just make a separate class outside to do textures we'll see later
         path = join( getcwd(), "components", "resources","textures" )
@@ -68,13 +71,20 @@ class Renderer():
     
             self.objects_to_render.append( (distance, wall_column, wall_pos) )
 
-    def draw( self, screen ):
+    def draw( self, screen):
         self.castAll()
         self.calc_texture()
 
-        sorted_list = sorted(self.objects_to_render, key=lambda t:t[0], reverse=True)
+        for sprite in self.sprites_to_render:
+            if sprite.get_sprite():
+                result = sprite.get_sprite_projection()
+                self.objects_to_render.append( result )
+                
+
+        sorted_list = sorted(self.objects_to_render , key=lambda t:t[0], reverse=True)
+
         for distance, image, pos in sorted_list:
-                screen.blit(image, pos)
+            screen.blit(image, pos)
 
         # this was the code for drawing rects as walls
 #        counter = 0

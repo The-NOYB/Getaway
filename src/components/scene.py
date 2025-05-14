@@ -3,7 +3,7 @@ from .gui import Gui
 from .map import Map
 from .consts import *
 from .entities.player import Player
-#from .entities.enemies import Enemies
+from .entities.sprites import SpriteObject 
 from .entities.renderer import Renderer
 
 class Scene():
@@ -25,6 +25,7 @@ class Scene():
             self.state = data["state"]
             self.mapObj = Map()
             self.player = Player( data["playerName"], 400, 300 , self.mapObj )
+            self.sprite = SpriteObject(self.player)
             self.renderer = Renderer( self.player, self.mapObj )
 
     def game(self, key_input, mouse_input, runtime) -> None:
