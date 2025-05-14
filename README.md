@@ -38,7 +38,7 @@
 | Turn Left     | `A`        |
 | Turn Right    | `D`        |
 | Dash          | `Space`    |
-[comment]: <| Restart Level | `R`        |>
+<!-- | Restart Level | `R`        | -->
 
 ## 🚀 How to Run
 
